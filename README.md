@@ -1,4 +1,4 @@
-# Práctica 8 · Servidor Web Seguro HTTPS (`empresa.local`)
+# Servidor Web Seguro HTTPS (`empresa.local`)
 
 Proyecto de **Administración de Servicios de Internet (ASI)** para desplegar un servidor web Apache con HTTPS mediante CA interna, redirección permanente de HTTP a HTTPS, autenticación básica en una zona privada y endurecimiento con UFW y cabeceras de seguridad.
 
