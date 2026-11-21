@@ -1,72 +1,282 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="data:,">
-  <title>Empresa · Zona Privada</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zona Privada · empresa.local</title>
   <style>
     :root {
-      --bg: #f4f7f9;
-      --card: #ffffff;
-      --text: #1b2430;
-      --muted: #5a6778;
-      --ok-bg: #ecfdf5;
-      --ok-text: #065f46;
-      --ok-border: #a7f3d0;
-      --border: #dce4ec;
+      --navy: #0f2942;
+      --blue: #1d4ed8;
+      --bg: #e2e8f0;
+      --surface: #ffffff;
+      --border: #cbd5e1;
+      --text: #1f2937;
+      --muted: #5b6778;
+      --ok-bg: #e8f5ee;
+      --ok-border: #b7dfc7;
+      --ok-text: #166534;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
       color: var(--text);
-      line-height: 1.55;
+      line-height: 1.5;
     }
-    header {
-      background: #0f172a;
-      color: #f8fafc;
-      padding: 1.25rem 2rem;
+
+    .topbar {
+      background-color: var(--navy);
+      color: #ffffff;
+      border-bottom: 3px solid var(--blue);
+    }
+
+    .topbar-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      background-color: var(--blue);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+    }
+
+    .nav a:hover, .nav a.active {
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .auth-banner {
+      background-color: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+      color: var(--ok-text);
+      padding: 0.9rem 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      font-size: 0.92rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      box-shadow: 0 2px 6px rgba(15, 41, 66, 0.05);
     }
-    .brand { font-weight: 700; font-size: 1.15rem; }
-    main { max-width: 760px; margin: 2.5rem auto; padding: 0 1.25rem; }
-    .card {
-      background: var(--card);
+
+    .panel {
+      background-color: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(15, 41, 66, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
-    .alert {
-      background: var(--ok-bg);
-      color: var(--ok-text);
-      border: 1px solid var(--ok-border);
-      padding: 0.85rem 1rem;
-      border-radius: 8px;
+
+    .panel:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(15, 41, 66, 0.12);
+      border-color: #93c5fd;
+    }
+
+    .panel-header {
+      padding: 0.95rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background-color: #f8fafc;
+    }
+
+    .panel-header h1, .panel-header h2 {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--navy);
+    }
+
+    .panel-body {
+      padding: 1.25rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
       font-weight: 600;
-      margin-bottom: 1.25rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background-color: #f8fafc;
     }
-    p { color: var(--muted); }
-    a { color: #0f766e; font-weight: 600; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.84rem;
+      background-color: #eef2f6;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      color: var(--navy);
+    }
+
+    .btn-back {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.55rem 1.05rem;
+      background-color: #e5e7eb;
+      color: var(--navy);
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-back:hover {
+      background-color: #d1d5db;
+      border-color: #9ca3af;
+    }
+
+    footer {
+      max-width: 1040px;
+      margin: 2rem auto 2.5rem;
+      padding: 1.25rem 1.5rem 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">empresa.local / privado</div>
-    <span>Área autenticada</span>
-  </header>
-  <main>
-    <div class="card">
-      <div class="alert">Acceso concedido mediante usuario y contraseña sobre conexión HTTPS.</div>
-      <h1>Zona Privada de Empresa</h1>
-      <p>Esta sección está restringida exclusivamente a usuarios autorizados en el servidor Apache (AuthType Basic sobre TLS).</p>
-      <p><a href="/">← Volver al portal público</a></p>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark">E8</span>
+        <span>empresa.local</span>
+      </div>
+      <nav class="nav">
+        <a href="/">Inicio</a>
+        <a href="/empresa-ca.crt">Certificado CA</a>
+        <a href="/privado/" class="active">Zona Privada</a>
+      </nav>
     </div>
+  </header>
+
+  <main class="container">
+    <div class="auth-banner">
+      <span><strong>Acceso concedido:</strong> Sesión validada mediante autenticación básica HTTP sobre conexión TLS cifrada.</span>
+      <span>Directorio: <code>/privado/</code></span>
+    </div>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h1>Panel de Administración y Recursos Internos</h1>
+      </div>
+      <div class="panel-body">
+        <p style="margin-top: 0; color: var(--muted); font-size: 0.94rem;">
+          Esta sección está restringida exclusivamente a personal autorizado mediante el archivo
+          de credenciales <code>/etc/apache2/empresa.htpasswd</code> gestionado por Apache.
+        </p>
+        <a href="/" class="btn-back">← Volver al Portal Público</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Resumen de infraestructura interna</h2>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Recurso</th>
+            <th>Ruta / Dirección</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Virtual Host</strong></td>
+            <td><code>/etc/apache2/sites-available/empresa.local.conf</code></td>
+            <td>Configuración de puertos 80 (redirección 301) y 443 (TLS).</td>
+          </tr>
+          <tr>
+            <td><strong>Certificado del servidor</strong></td>
+            <td><code>/etc/ssl/certs/empresa.local.crt</code></td>
+            <td>Firmado por <em>Empresa Local Root CA</em> con extensión SAN.</td>
+          </tr>
+          <tr>
+            <td><strong>Endurecimiento Apache</strong></td>
+            <td><code>/etc/apache2/conf-available/z-empresa-hardening.conf</code></td>
+            <td>Oculta versión del servidor (<code>ServerTokens Prod</code>).</td>
+          </tr>
+          <tr>
+            <td><strong>Cliente autorizado</strong></td>
+            <td><code>192.168.40.20</code> (Linux Mint)</td>
+            <td>Estación de pruebas con CA raíz instalada en sistema y Firefox.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </main>
+
+  <footer>
+    <span>Zona Restringida · Equipo 8</span>
+    <span>Administración de Servicios de Internet · Práctica 8</span>
+  </footer>
+
 </body>
 </html>
